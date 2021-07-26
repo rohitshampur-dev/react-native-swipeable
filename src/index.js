@@ -74,7 +74,8 @@ export default class Swipeable extends PureComponent {
     onRef: PropTypes.func,
     onPanAnimatedValueRef: PropTypes.func,
     swipeStartMinDistance: PropTypes.number,
-
+    testID: PropTypes.string
+    
     // styles
     style: ViewPropTypes.style,
     leftContainerStyle: ViewPropTypes.style,
@@ -152,7 +153,8 @@ export default class Swipeable extends PureComponent {
     // misc
     onRef: noop,
     onPanAnimatedValueRef: noop,
-    swipeStartMinDistance: 15
+    swipeStartMinDistance: 15,
+    testID: 'swipe_view'
   };
 
   state = {
@@ -605,6 +607,7 @@ export default class Swipeable extends PureComponent {
       rightContainerStyle,
       rightContent,
       style,
+      testID,
       ...props
     } = this.props;
     const {pan, width} = this.state;
@@ -622,7 +625,7 @@ export default class Swipeable extends PureComponent {
     }];
 
     return (
-      <View onLayout={this._handleLayout} style={[styles.container, style]} {...this._panResponder.panHandlers} {...props}>
+      <View testID={testID} onLayout={this._handleLayout} style={[styles.container, style]} {...this._panResponder.panHandlers} {...props}>
         {canSwipeRight && (
           <Animated.View style={[{transform, marginLeft: -width, width}, leftContainerStyle]}>
             {leftContent || this._renderButtons(leftButtons, true)}
